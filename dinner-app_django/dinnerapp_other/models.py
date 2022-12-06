@@ -20,10 +20,12 @@ class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
+    deadline = models.DateTimeField()
     location = models.TextField()
     capacity = models.IntegerField()
     isPublic = models.BooleanField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    houseRules = models.TextField()
 
     def __str__(self):
         return self.name

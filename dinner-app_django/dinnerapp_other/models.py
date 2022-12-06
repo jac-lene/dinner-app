@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
+
 
 class Profile(models.Model):
-    birthday = models.DateField()
+    birthdate = models.DateField(default=datetime.now())
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
@@ -11,8 +13,8 @@ class Profile(models.Model):
     bio = models.TextField()
     location = models.CharField(max_length=200)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    isHost = models.BooleanField()
-    isVerified = models.BooleanField()
+    isHost = models.BooleanField(default=False)
+    isVerified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -21,12 +23,11 @@ class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
-    deadline = models.DateTimeField()
     location = models.TextField()
     capacity = models.IntegerField()
     isPublic = models.BooleanField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    houseRules = models.TextField()
+    houseRules = models.TextField(default='have fun')
 
     def __str__(self):
         return self.name

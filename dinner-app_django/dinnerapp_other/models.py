@@ -1,34 +1,50 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields 
 
 class Profile(models.Model):
+    birthday = models.DateField()
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
     age = models.IntegerField()
     profession = models.CharField(max_length=200)
-    about = models.TextField()
-    city = models.CharField(max_length=200)
+    bio = models.TextField()
+    location = models.CharField(max_length=200)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isHost = models.BooleanField()
 
     def __str__(self):
         return self.name
 
-class Photos(models.Model):
-    isProfile = models.BooleanField()
-    imgUrl = models.TextField()
-    profile = models.ForeignKey(Profile, related_name='photos')
-
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    time = models.DateTimeField()
+    datetime = models.DateTimeField()
+    venue = models.CharField(max_length=200)
     location = models.TextField()
     capacity = models.IntegerField()
     isPublic = models.BooleanField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Review(models.Model):
+    body = models.TextField()
+    subject = models.CharField(max_length=100)
+    profile = models.ForeignKey(Profile, related_name='review', on_delete=models.CASCADE)
+    dinner = models.ForeignKey(Dinner, related_name='review', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name 
+
+class Photo(models.Model):
+    isProfile = models.BooleanField()
+    imgUrl = models.TextField()
+    profile = models.ForeignKey(Profile, related_name='photo', on_delete=models.CASCADE)
+    dinner = models.ForeignKey(Dinner, related_name='photo', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

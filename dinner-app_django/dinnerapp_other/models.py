@@ -12,6 +12,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=200)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isHost = models.BooleanField()
+    isVerified = models.BooleanField()
 
     def __str__(self):
         return self.name

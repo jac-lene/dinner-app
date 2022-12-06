@@ -11,14 +11,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='profile',
-            name='bannerImage',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='profileImage',
-        ),
+        # migrations.RemoveField(
+        #     model_name='profile',
+        #     name='bannerImage',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='profile',
+        #     name='profileImage',
+        # ),
         migrations.CreateModel(
             name='Photos',
             fields=[

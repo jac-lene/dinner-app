@@ -5,8 +5,9 @@ from rest_framework.views import APIView
 from .models import User
 
 from .models import Profile, Dinner, Chat, Message, Photo
-from .serializers import PhotoSerializer, ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer
+from .serializers import PhotoSerializer, ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer, RegisterSerializer, MyTokenObtainPairSerializer
 from rest_framework import generics, status
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class Users(APIView):
@@ -14,6 +15,26 @@ class Users(APIView):
         data = User.objects.all()
         serializer = UserSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+class UserDetail(APIView):
+    def get_user_auth(self, id):
+        return User.objects.all().filter(id=id)
+
+    def get_user_profile(self, id):
+        return Profile.objects.all().filter(user_id=id)
+
+    def get(self, request, id):
+        user = UserSerializer(self.get_user_auth(id), many=True)
+        profile = ProfileSerializer(self.get_user_profile(id), many=True)
+        return JsonResponse({"user": user.data, "profile": profile.data}, safe=False)
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = ([])
+    serializer_class = RegisterSerializer
 
 class ProfileList(generics.ListCreateAPIView):
     queryset = Profile.objects.all()

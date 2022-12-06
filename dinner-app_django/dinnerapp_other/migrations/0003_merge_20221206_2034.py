@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dinnerapp_other', '0002_remove_profile_bannerimage_and_more'),
+        # ('dinnerapp_other', '0002_remove_profile_bannerimage_and_more'),
         ('dinnerapp_other', '0002_rename_time_dinner_datetime_rename_about_profile_bio_and_more'),
     ]
 

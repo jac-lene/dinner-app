@@ -27,14 +27,14 @@ class Migration(migrations.Migration):
             old_name='city',
             new_name='location',
         ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='bannerImage',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='profileImage',
-        ),
+        # migrations.RemoveField(
+        #     model_name='profile',
+        #     name='bannerImage',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='profile',
+        #     name='profileImage',
+        # ),
         migrations.AddField(
             model_name='dinner',
             name='houseRules',

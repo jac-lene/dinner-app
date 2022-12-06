@@ -41,8 +41,10 @@ class DinnerDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DinnerSerializer
 
 class ChatList(generics.ListCreateAPIView):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
+     def get(self, request, userId):
+        data = Chat.objects.filter(user=userId)
+        serializer = UserSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class ChatDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Chat.objects.all()

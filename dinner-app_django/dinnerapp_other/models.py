@@ -17,7 +17,7 @@ class Profile(models.Model):
     isVerified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.user.first_name
 
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
@@ -57,13 +57,13 @@ class Chat(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.dinner.name + '-' + self.user.user.first_name
 
 class Message(models.Model):
     text = models.TextField()
-    time = models.DateTimeField()
+    time = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.text[:60]

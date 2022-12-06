@@ -10,7 +10,5 @@ urlpatterns = [
     path('photos/', views.PhotoList.as_view(), name="photos_list"),
     path('photos/<int:pk>/', views.PhotoDetail.as_view(), name="photo_detail"),
     path('chats/<int:userId>/', views.ChatList.as_view(), name="chat_list"),
-    path('chats/<int:pk>/', views.ChatDetail.as_view(), name="chat_detail"),
-    path('messages/', views.MessageList.as_view(), name="message_list"),
-    path('messages/<int:pk>/', views.MessageDetail.as_view(), name="message_detail")
+    path('messages/<int:chatId>/', views.MessageList.as_view(), name="message_list"),
 ]

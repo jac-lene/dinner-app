@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields 
 
 class Profile(models.Model):
     birthday = models.DateField()
@@ -20,8 +19,7 @@ class Profile(models.Model):
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    datetime = models.DateTimeField()
-    venue = models.CharField(max_length=200)
+    dateTime = models.DateTimeField()
     location = models.TextField()
     capacity = models.IntegerField()
     isPublic = models.BooleanField()

@@ -4,7 +4,8 @@ from .models import Dinner
 from .models import Chat
 from .models import Message
 from .models import User
-from .models import Photos
+from .models import Photo
+from .models import Review
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -12,9 +13,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = '__all__' 
 
-class PhotosSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Photos
+        model = Review
+        fields = '__all__' 
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
         fields = '__all__' 
 
 class DinnerSerializer(serializers.ModelSerializer):

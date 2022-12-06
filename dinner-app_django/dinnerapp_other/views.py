@@ -4,10 +4,9 @@ from .serializers import UserSerializer
 from rest_framework.views import APIView
 from .models import User
 
-from .models import Profile, Dinner, Chat, Message, Photos
-from .serializers import PhotosSerializer, ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer
+from .models import Profile, Dinner, Chat, Message, Photo
+from .serializers import PhotoSerializer, ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer
 from rest_framework import generics, status
-
 
 
 class Users(APIView):
@@ -25,12 +24,12 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProfileSerializer
 
 class PhotoList(generics.ListCreateAPIView):
-    queryset = Photos.objects.all()
-    serializer_class = PhotosSerializer
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
 
 class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Photos.objects.all()
-    serializer_class = PhotosSerializer
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
 
 class DinnerList(generics.ListCreateAPIView):
     queryset = Dinner.objects.all()

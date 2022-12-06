@@ -2,11 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 
-
-
 class Profile(models.Model):
-    profileImage = models.TextField()
-    bannerImage = models.TextField()
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
@@ -19,6 +15,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
+
+class Photos(models.Model):
+    isProfile = models.BooleanField()
+    imgUrl = models.TextField()
+    profile = models.ForeignKey(Profile, related_name='photos')
 
 class Dinner(models.Model):
     name = models.CharField(max_length=200)

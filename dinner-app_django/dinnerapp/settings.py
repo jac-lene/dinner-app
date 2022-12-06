@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a&bh*#c=96&)u1+9d8cu*b)he#3$r%ywc+_c&lg-b6ms833lop
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'dinnerapp_other',
         'USER': 'dinneruser',
         'PASSWORD': 'dinner',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
     }
 }
 

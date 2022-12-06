@@ -4,11 +4,17 @@ from .models import Dinner
 from .models import Chat
 from .models import Message
 from .models import User
+from .models import Photos
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
+        fields = '__all__' 
+
+class PhotosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photos
         fields = '__all__' 
 
 class DinnerSerializer(serializers.ModelSerializer):

@@ -19,7 +19,7 @@ class Profile(models.Model):
 class Photos(models.Model):
     isProfile = models.BooleanField()
     imgUrl = models.TextField()
-    profile = models.ForeignKey(Profile, related_name='photos')
+    profile = models.ForeignKey(Profile, related_name='photos', on_delete=models.CASCADE)
 
 class Dinner(models.Model):
     name = models.CharField(max_length=200)

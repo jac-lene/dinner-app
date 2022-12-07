@@ -28,13 +28,15 @@ class PhotoList(generics.ListCreateAPIView):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
-class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
-
 class DinnerList(generics.ListCreateAPIView):
     def get(self, request):
         data = Dinner.objects.all()
+        serializer = DinnerSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+class Dinner(generics.ListCreateAPIView):
+    def get(self, request, dinnerId):
+        data = Dinner.objects.filter(pk=dinnerId)
         serializer = DinnerSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 

@@ -14,6 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isHost = models.BooleanField(default=False)
     isVerified = models.BooleanField(default=False)
+    birthdate = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.user.first_name
@@ -23,7 +24,6 @@ class Dinner(models.Model):
     description = models.TextField()
     dateTime = models.DateTimeField()
     capacity = models.IntegerField()
-    host = models.ForeignKey(Profile, on_delete=models.CASCADE)
     houseRules = models.TextField(default='have fun')
     address = models.CharField(max_length=200)
     apartment = models.CharField(max_length=200)
@@ -31,6 +31,7 @@ class Dinner(models.Model):
     state = models.CharField(max_length=200)
     zip = models.CharField(max_length=5)
     country = models.CharField(max_length=200, default='United States')
+    attendees = models.ManyToManyField(Profile)
 
     def __str__(self):
         return self.name

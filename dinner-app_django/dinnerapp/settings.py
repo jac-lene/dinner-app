@@ -80,9 +80,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dinnerapp_other',
-        'USER': 'dinneruser',
-        'PASSWORD': 'dinner',
-        'HOST': 'dinnerapp-backend.herokuapp.com',
     }
 }
 

@@ -62,9 +62,15 @@ class DinnerShow(generics.ListCreateAPIView):
         serializer = DinnerSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+class AllChats(APIView):
+    def get(self, request, userId):
+        data = Chat.objects.filter(users=userId)
+        serializer = ChatSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 class ChatList(APIView):
-     def get(self, request, userId):
-        data = Chat.objects.filter(user=userId)
+     def get(self, request, dinnerId):
+        data = Chat.objects.filter(dinner=dinnerId)
         serializer = ChatSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 

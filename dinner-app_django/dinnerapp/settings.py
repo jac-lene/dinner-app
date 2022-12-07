@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'dinnerapp_other',
         'USER': 'dinneruser',
         'PASSWORD': 'dinner',
-        'HOST': 'localhost',
+        'HOST': 'dinnerapp-backend.herokuapp.com',
     }
 }
 

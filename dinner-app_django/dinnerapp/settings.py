@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a&bh*#c=96&)u1+9d8cu*b)he#3$r%ywc+_c&lg-b6ms833lop
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dinnerapp_other',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'NAME': 'dinnerapp_other',
         'USER': 'dinneruser',
         'PASSWORD': 'dinner',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
     }
 }
 
@@ -103,6 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

@@ -7,6 +7,7 @@ from datetime import datetime
 class Profile(models.Model):
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
     age = models.IntegerField()
     profession = models.CharField(max_length=200)
@@ -22,6 +23,7 @@ class Profile(models.Model):
 
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
     capacity = models.IntegerField()
@@ -46,15 +48,6 @@ class Review(models.Model):
 
     def __str__(self):
         return self.subject
-
-class Photo(models.Model):
-    isProfile = models.BooleanField()
-    imgUrl = models.TextField()
-    profile = models.ForeignKey(Profile, related_name='photo', on_delete=models.CASCADE)
-    dinner = models.ForeignKey(Dinner, related_name='photo', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
 
 class Chat(models.Model):
     subject = models.CharField(max_length=200)

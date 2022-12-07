@@ -4,8 +4,8 @@ from .serializers import UserSerializer
 from rest_framework.views import APIView
 from .models import User
 
-from .models import Profile, Dinner, Chat, Message, Photo
-from .serializers import PhotoSerializer, ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer, RegisterSerializer, MyTokenObtainPairSerializer
+from .models import Profile, Dinner, Chat, Message
+from .serializers import ProfileSerializer, DinnerSerializer, ChatSerializer, MessageSerializer, UserSerializer, RegisterSerializer, MyTokenObtainPairSerializer
 from rest_framework import generics, status
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -45,10 +45,6 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         data = Profile.objects.filter(pk=pk)
         serializer = ProfileSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
-
-class PhotoList(generics.ListCreateAPIView):
-    queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
 
 class DinnerList(generics.ListCreateAPIView):
     def get(self, request):

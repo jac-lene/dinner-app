@@ -4,7 +4,6 @@ from .models import Dinner
 from .models import Chat
 from .models import Message
 from .models import User
-from .models import Photo
 from .models import Review
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -18,11 +17,6 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__' 
-
-class PhotoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Photo
         fields = '__all__' 
 
 class DinnerSerializer(serializers.ModelSerializer):

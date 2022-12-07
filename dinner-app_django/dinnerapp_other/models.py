@@ -18,25 +18,19 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.first_name
 
-class Location(models.Model):
-    address = models.CharField(max_length=200)
-    apartment = models.CharField(max_length=200)
-    city = models.CharField(max_length=200)
-    state = models.CharField(max_length=200)
-    zip = models.CharField(max_length=5)
-    country = models.CharField(max_length=200, default='United States')
-
-    def __str__(self):
-        return self.address
-
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
     capacity = models.IntegerField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
     houseRules = models.TextField(default='have fun')
+    address = models.CharField(max_length=200)
+    apartment = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    zip = models.CharField(max_length=5)
+    country = models.CharField(max_length=200, default='United States')
 
     def __str__(self):
         return self.name

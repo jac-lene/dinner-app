@@ -19,13 +19,20 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.first_name
 
+class Location(models.Model):
+    address = models.CharField(max_length=200)
+    apartment = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    zip = models.CharField(max_length=5)
+    country = models.CharField(max_length=200, default='United States')
+
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
-    location = models.TextField()
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     capacity = models.IntegerField()
-    isPublic = models.BooleanField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
     houseRules = models.TextField(default='have fun')
 

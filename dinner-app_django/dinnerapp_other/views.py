@@ -21,8 +21,10 @@ class ProfileList(generics.ListCreateAPIView):
     serializer_class = ProfileSerializer
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+    def get(self, request, pk):
+        data = Profile.objects.filter(pk=pk)
+        serializer = ProfileSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class PhotoList(generics.ListCreateAPIView):
     queryset = Photo.objects.all()
@@ -34,7 +36,7 @@ class DinnerList(generics.ListCreateAPIView):
         serializer = DinnerSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-class Dinner(generics.ListCreateAPIView):
+class DinnerShow(generics.ListCreateAPIView):
     def get(self, request, dinnerId):
         data = Dinner.objects.filter(pk=dinnerId)
         serializer = DinnerSerializer(data, many=True)

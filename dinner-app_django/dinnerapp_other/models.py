@@ -14,7 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isHost = models.BooleanField(default=False)
     isVerified = models.BooleanField(default=False)
-    birthdate = models.DateTimeField(default=datetime.now)
+    birthdate = models.DateField()
 
     def __str__(self):
         return self.user.first_name

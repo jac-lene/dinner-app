@@ -5,7 +5,6 @@ from datetime import datetime
 
 
 class Profile(models.Model):
-    birthdate = models.DateField(default=datetime.now())
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
@@ -16,19 +15,24 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isHost = models.BooleanField(default=False)
     isVerified = models.BooleanField(default=False)
+    birthdate = models.DateField()
 
     def __str__(self):
-        return self.name
+        return self.user.first_name
 
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
-    location = models.TextField()
     capacity = models.IntegerField()
-    isPublic = models.BooleanField()
-    host = models.ForeignKey(Profile, on_delete=models.CASCADE)
     houseRules = models.TextField(default='have fun')
+    address = models.CharField(max_length=200)
+    apartment = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    zip = models.CharField(max_length=5)
+    country = models.CharField(max_length=200, default='United States')
+    attendees = models.ManyToManyField(Profile)
 
     def __str__(self):
         return self.name
@@ -58,13 +62,13 @@ class Chat(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.dinner.name + '-' + self.user.user.first_name
 
 class Message(models.Model):
     text = models.TextField()
-    time = models.DateTimeField()
+    time = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.text[:60]

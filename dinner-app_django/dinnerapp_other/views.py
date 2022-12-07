@@ -41,40 +41,39 @@ class ProfileList(generics.ListCreateAPIView):
     serializer_class = ProfileSerializer
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+    def get(self, request, pk):
+        data = Profile.objects.filter(pk=pk)
+        serializer = ProfileSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class PhotoList(generics.ListCreateAPIView):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
-class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
-
 class DinnerList(generics.ListCreateAPIView):
-    queryset = Dinner.objects.all()
-    serializer_class = DinnerSerializer
+    def get(self, request):
+        data = Dinner.objects.all()
+        serializer = DinnerSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-class DinnerDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Dinner.objects.all()
-    serializer_class = DinnerSerializer
+class DinnerShow(generics.ListCreateAPIView):
+    def get(self, request, dinnerId):
+        data = Dinner.objects.filter(pk=dinnerId)
+        serializer = DinnerSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-class ChatList(generics.ListCreateAPIView):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
-
-class ChatDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
+class ChatList(APIView):
+     def get(self, request, userId):
+        data = Chat.objects.filter(user=userId)
+        serializer = ChatSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class MessageList(generics.ListCreateAPIView):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
+    def get(self, request, chatId):
+        data = Message.objects.filter(chat=chatId)
+        serializer = MessageSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
 
 
 

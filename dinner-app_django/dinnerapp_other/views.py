@@ -33,8 +33,10 @@ class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PhotoSerializer
 
 class DinnerList(generics.ListCreateAPIView):
-    queryset = Dinner.objects.all()
-    serializer_class = DinnerSerializer
+    def get(self, request):
+        data = Dinner.objects.all()
+        serializer = DinnerSerializer(data, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class DinnerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dinner.objects.all()

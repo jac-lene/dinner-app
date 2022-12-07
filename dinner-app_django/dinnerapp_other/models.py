@@ -4,7 +4,6 @@ from datetime import datetime
 
 
 class Profile(models.Model):
-    birthdate = models.DateField(default=datetime.now())
     pronouns = models.CharField(max_length=200)
     orientation = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
@@ -27,13 +26,16 @@ class Location(models.Model):
     zip = models.CharField(max_length=5)
     country = models.CharField(max_length=200, default='United States')
 
+    def __str__(self):
+        return self.address
+
 class Dinner(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     dateTime = models.DateTimeField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     capacity = models.IntegerField()
     host = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
     houseRules = models.TextField(default='have fun')
 
     def __str__(self):

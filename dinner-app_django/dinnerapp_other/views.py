@@ -52,9 +52,6 @@ class MessageList(generics.ListCreateAPIView):
         serializer = MessageSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
 
 
 

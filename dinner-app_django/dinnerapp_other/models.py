@@ -45,7 +45,7 @@ class Review(models.Model):
     dinner = models.ForeignKey(Dinner, related_name='review', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name 
+        return self.subject
 
 class Photo(models.Model):
     isProfile = models.BooleanField()
@@ -59,10 +59,10 @@ class Photo(models.Model):
 class Chat(models.Model):
     subject = models.CharField(max_length=200)
     dinner = models.ForeignKey(Dinner, on_delete=models.CASCADE)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    users = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return self.dinner.name + '-' + self.user.user.first_name
+        return self.dinner.name
 
 class Message(models.Model):
     text = models.TextField()

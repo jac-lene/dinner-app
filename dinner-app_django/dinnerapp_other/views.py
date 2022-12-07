@@ -23,9 +23,9 @@ class UserDetail(APIView):
     def get_user_profile(self, id):
         return Profile.objects.all().filter(user_id=id)
 
-    def get(self, request, id):
-        user = UserSerializer(self.get_user_auth(id), many=True)
-        profile = ProfileSerializer(self.get_user_profile(id), many=True)
+    def get(self, request, pk):
+        user = UserSerializer(self.get_user_auth(pk), many=True)
+        profile = ProfileSerializer(self.get_user_profile(pk), many=True)
         return JsonResponse({"user": user.data, "profile": profile.data}, safe=False)
 
 class MyTokenObtainPairView(TokenObtainPairView):

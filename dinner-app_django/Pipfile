@@ -10,6 +10,7 @@ djangorestframework = "*"
 django-rest-framework = "*"
 djangorestframework-simplejwt = "*"
 gunicorn = "*"
+django-on-heroku = "*"
 
 [dev-packages]
 
